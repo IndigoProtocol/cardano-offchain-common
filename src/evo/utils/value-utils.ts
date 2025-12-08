@@ -1,4 +1,4 @@
-import { Assets, toUnit, Unit } from '@lucid-evolution/lucid';
+import { Assets, toHex, toUnit, Unit } from '@lucid-evolution/lucid';
 import { AssetClass } from '../types.js';
 
 export function mkLovelacesOf(amount: bigint): Assets {
@@ -6,11 +6,13 @@ export function mkLovelacesOf(amount: bigint): Assets {
 }
 
 export function assetClassToUnit(ac: AssetClass): Unit {
-  return toUnit(ac.policy_id, ac.asset_name);
+  return toUnit(toHex(ac.currencySymbol), toHex(ac.tokenName));
 }
 
 export function isSameAssetClass(ac1: AssetClass, ac2: AssetClass): boolean {
-  return ac1.asset_name === ac2.asset_name && ac1.policy_id === ac2.policy_id;
+  return (
+    ac1.tokenName === ac2.tokenName && ac1.currencySymbol === ac2.currencySymbol
+  );
 }
 
 export function mkAssetsOf(assetClass: AssetClass, amount: bigint): Assets {

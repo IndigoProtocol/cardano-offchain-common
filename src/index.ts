@@ -1,3 +1,3 @@
-export * from './lucid/index.js';
+export * as LucidCommon from './lucid/index.js';
 
-export * as EvoCommon from './evo/index.js';
+export * from './evo/index.js';
