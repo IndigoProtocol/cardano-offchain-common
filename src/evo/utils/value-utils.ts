@@ -11,7 +11,8 @@ export function assetClassToUnit(ac: AssetClass): Unit {
 
 export function isSameAssetClass(ac1: AssetClass, ac2: AssetClass): boolean {
   return (
-    ac1.tokenName === ac2.tokenName && ac1.currencySymbol === ac2.currencySymbol
+    toHex(ac1.tokenName) === toHex(ac2.tokenName) &&
+    toHex(ac1.currencySymbol) === toHex(ac2.currencySymbol)
   );
 }
 
