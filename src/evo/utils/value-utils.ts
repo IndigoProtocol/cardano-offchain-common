@@ -6,7 +6,18 @@ export function mkLovelacesOf(amount: bigint): Assets {
 }
 
 export function assetClassToUnit(ac: AssetClass): Unit {
-  return toUnit(toHex(ac.currencySymbol), toHex(ac.tokenName));
+  const policy = toHex(ac.currencySymbol);
+  const name = toHex(ac.tokenName);
+
+  if (policy === '') {
+    if (name !== '') {
+      throw new Error('Expected empty asset name for lovelace.');
+    }
+
+    return 'lovelace';
+  }
+
+  return toUnit(policy, name);
 }
 
 export function isSameAssetClass(ac1: AssetClass, ac2: AssetClass): boolean {
