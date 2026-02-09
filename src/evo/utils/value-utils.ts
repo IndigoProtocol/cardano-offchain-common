@@ -1,5 +1,10 @@
-import { Assets, toHex, toUnit, Unit } from '@lucid-evolution/lucid';
+import { Assets, fromHex, toHex, toUnit, Unit } from '@lucid-evolution/lucid';
 import { AssetClass } from '../types.js';
+
+export const adaAssetClass: AssetClass = {
+  currencySymbol: fromHex(''),
+  tokenName: fromHex(''),
+};
 
 export function mkLovelacesOf(amount: bigint): Assets {
   return { lovelace: amount };
