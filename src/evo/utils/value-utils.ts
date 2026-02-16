@@ -1,4 +1,11 @@
-import { Assets, fromHex, toHex, toUnit, Unit } from '@lucid-evolution/lucid';
+import {
+  addAssets,
+  Assets,
+  fromHex,
+  toHex,
+  toUnit,
+  Unit,
+} from '@lucid-evolution/lucid';
 import { AssetClass } from '../types.js';
 
 export const adaAssetClass: AssetClass = {
@@ -53,6 +60,10 @@ export function negateAssets(assets: Assets): Assets {
   return Object.fromEntries(
     Object.entries(assets).map(([asset, amt]) => [asset, -amt]),
   );
+}
+
+export function noAdaValue(assets: Assets): Assets {
+  return addAssets(assets, negateAssets(mkLovelacesOf(lovelacesAmt(assets))));
 }
 
 export function isAssetsZero(assets: Assets): boolean {
