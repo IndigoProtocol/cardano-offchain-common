@@ -46,7 +46,7 @@ export function mkAssetsOf(assetClass: AssetClass, amount: bigint): Assets {
 }
 
 export function lovelacesAmt(assets: Assets): bigint {
-  return assets.lovelace ?? 0n;
+  return assets['lovelace'] ?? 0n;
 }
 
 export function assetClassValueOf(
