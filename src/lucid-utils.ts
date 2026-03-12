@@ -50,15 +50,15 @@ export function estimateUtxoMinLovelace(
     address: destinationAddr,
     datumHash: match(destinationDatum)
       .with({ DatumHash: { hash: P.select() } }, (dHash) => dHash)
-      .otherwise(() => undefined),
+      .otherwise(() => null),
     datum: match(destinationDatum)
       .with({ InlineDatum: { datum: P.select() } }, (data) => Data.to(data))
-      .otherwise(() => undefined),
+      .otherwise(() => null),
     assets: assets,
     // Use dummy tx hash and out idx
     txHash: '0000000000000000000000000000000000000000000000000000000000000000',
     outputIndex: 0,
-    scriptRef: scriptRef,
+    scriptRef: scriptRef ?? null,
   });
 }
 
