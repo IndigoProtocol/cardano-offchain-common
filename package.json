@@ -36,7 +36,7 @@
   },
   "peerDependencies": {
     "@lucid-evolution/lucid": "0.4.x",
-    "@evolution-sdk/evolution": "0.2.x",
+    "@evolution-sdk/evolution": "0.3.22",
     "ts-pattern": "5.9.x"
   }
 }

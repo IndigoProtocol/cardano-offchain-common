@@ -1,37 +1,37 @@
-import { Core } from '@evolution-sdk/evolution';
+import { TSchema, Data } from '@evolution-sdk/evolution';
 
-export const OutputReferenceSchema = Core.TSchema.Struct({
-  txHash: Core.TSchema.ByteArray,
-  outputIndex: Core.TSchema.Integer,
+export const OutputReferenceSchema = TSchema.Struct({
+  txHash: TSchema.ByteArray,
+  outputIndex: TSchema.Integer,
 });
 
 export type OutputReference = typeof OutputReferenceSchema.Type;
 
 export function serialiseOutputReference(d: OutputReference): string {
-  return Core.Data.withSchema(OutputReferenceSchema).toCBORHex(d);
+  return Data.withSchema(OutputReferenceSchema).toCBORHex(d);
 }
 
-const CredentialSchema = Core.TSchema.Union(
-  Core.TSchema.Struct(
-    { PublicKeyCredential: Core.TSchema.ByteArray },
+const CredentialSchema = TSchema.Union(
+  TSchema.Struct(
+    { PublicKeyCredential: TSchema.ByteArray },
     { flatInUnion: true },
   ),
-  Core.TSchema.Struct(
-    { ScriptCredential: Core.TSchema.ByteArray },
+  TSchema.Struct(
+    { ScriptCredential: TSchema.ByteArray },
     { flatInUnion: true },
   ),
 );
 
 export type CredentialD = typeof CredentialSchema.Type;
 
-export const StakeCredentialSchema = Core.TSchema.Union(
-  Core.TSchema.Struct({ Inline: CredentialSchema }, { flatInUnion: true }),
-  Core.TSchema.Struct(
+export const StakeCredentialSchema = TSchema.Union(
+  TSchema.Struct({ Inline: CredentialSchema }, { flatInUnion: true }),
+  TSchema.Struct(
     {
-      Pointer: Core.TSchema.Struct({
-        slotNumber: Core.TSchema.Integer,
-        transactionIndex: Core.TSchema.Integer,
-        certificateIndex: Core.TSchema.Integer,
+      Pointer: TSchema.Struct({
+        slotNumber: TSchema.Integer,
+        transactionIndex: TSchema.Integer,
+        certificateIndex: TSchema.Integer,
       }),
     },
     { flatInUnion: true },
@@ -40,24 +40,24 @@ export const StakeCredentialSchema = Core.TSchema.Union(
 
 export type StakeCredentialD = typeof StakeCredentialSchema.Type;
 
-export const AddressSchema = Core.TSchema.Struct({
+export const AddressSchema = TSchema.Struct({
   paymentCredential: CredentialSchema,
-  stakeCredential: Core.TSchema.NullOr(StakeCredentialSchema),
+  stakeCredential: TSchema.NullOr(StakeCredentialSchema),
 });
 
 export type AddressD = typeof AddressSchema.Type;
 
 export function serialiseAddressD(d: AddressD): string {
-  return Core.Data.withSchema(AddressSchema).toCBORHex(d);
+  return Data.withSchema(AddressSchema).toCBORHex(d);
 }
 
-export const AssetClassSchema = Core.TSchema.Struct({
-  currencySymbol: Core.TSchema.ByteArray,
-  tokenName: Core.TSchema.ByteArray,
+export const AssetClassSchema = TSchema.Struct({
+  currencySymbol: TSchema.ByteArray,
+  tokenName: TSchema.ByteArray,
 });
 
 export type AssetClass = typeof AssetClassSchema.Type;
 
 export function serialiseAssetClass(ac: AssetClass): string {
-  return Core.Data.withSchema(AssetClassSchema).toCBORHex(ac);
+  return Data.withSchema(AssetClassSchema).toCBORHex(ac);
 }
