@@ -7,6 +7,7 @@ import {
   Unit,
 } from '@lucid-evolution/lucid';
 import { AssetClass } from '../types.js';
+import { match, P } from 'ts-pattern';
 
 export const adaAssetClass: AssetClass = {
   currencySymbol: fromHex(''),
@@ -68,4 +69,19 @@ export function noAdaValue(assets: Assets): Assets {
 
 export function isAssetsZero(assets: Assets): boolean {
   return Object.entries(assets).every(([_, amt]) => amt === 0n);
+}
+
+export function unitToAssetClass(asset: string): AssetClass {
+  if (asset.length === 0) {
+    return adaAssetClass;
+  }
+
+  return match(asset.split('.'))
+    .returnType<AssetClass>()
+    .with([P.string, P.string], ([policy, asset]) => {
+      return { currencySymbol: fromHex(policy), tokenName: fromHex(asset) };
+    })
+    .otherwise(() => {
+      throw new Error(`Unknown asset format. Asset: ${asset}`);
+    });
 }
