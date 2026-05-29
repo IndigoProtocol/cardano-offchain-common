@@ -5,7 +5,10 @@ import { fromHex } from '@lucid-evolution/lucid';
 describe('Value utils', () => {
   describe('unitToAssetClass', () => {
     test('1', () => {
-      expect(unitToAssetClass('')).toEqual(adaAssetClass);
+      expect(unitToAssetClass('', { adaUnit: '' })).toEqual(adaAssetClass);
+      expect(unitToAssetClass('lovelace', { adaUnit: 'lovelace' })).toEqual(
+        adaAssetClass,
+      );
       expect(
         unitToAssetClass(
           'ed541fe294f313fa9dc1131ef094adabcc58aa1570643e406461afa7.4e49474854',

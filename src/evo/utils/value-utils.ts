@@ -20,7 +20,11 @@ export function mkLovelacesOf(amount: bigint): Assets {
 
 export function assetClassToUnit(
   ac: AssetClass,
-  adaUnit: string = 'lovelace',
+  /**
+   * The default `lovelace` is based on the lucid convention.
+   * If you're using it outside of lucid, you can specify your own unit for ADA here.
+   */
+  config: { adaUnit: string } = { adaUnit: 'lovelace' },
 ): Unit {
   const policy = toHex(ac.currencySymbol);
   const name = toHex(ac.tokenName);
@@ -30,7 +34,7 @@ export function assetClassToUnit(
       throw new Error('Expected empty asset name for lovelace.');
     }
 
-    return adaUnit;
+    return config.adaUnit;
   }
 
   return toUnit(policy, name);
@@ -74,8 +78,15 @@ export function isAssetsZero(assets: Assets): boolean {
   return Object.entries(assets).every(([_, amt]) => amt === 0n);
 }
 
-export function unitToAssetClass(asset: string): AssetClass {
-  if (asset.length === 0) {
+export function unitToAssetClass(
+  asset: string,
+  /**
+   * The default `lovelace` is based on the lucid convention.
+   * If you're using it outside of lucid, you can specify your own unit for ADA here.
+   */
+  config: { adaUnit: string } = { adaUnit: 'lovelace' },
+): AssetClass {
+  if (asset === config.adaUnit) {
     return adaAssetClass;
   }
 
