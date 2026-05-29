@@ -18,7 +18,10 @@ export function mkLovelacesOf(amount: bigint): Assets {
   return { lovelace: amount };
 }
 
-export function assetClassToUnit(ac: AssetClass): Unit {
+export function assetClassToUnit(
+  ac: AssetClass,
+  adaUnit: string = 'lovelace',
+): Unit {
   const policy = toHex(ac.currencySymbol);
   const name = toHex(ac.tokenName);
 
@@ -27,7 +30,7 @@ export function assetClassToUnit(ac: AssetClass): Unit {
       throw new Error('Expected empty asset name for lovelace.');
     }
 
-    return 'lovelace';
+    return adaUnit;
   }
 
   return toUnit(policy, name);
