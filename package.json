@@ -1,5 +1,5 @@
 {
-  "name": "@3rd-eye-labs/cardano-offchain-common",
+  "name": "@indigo-labs/cardano-offchain-common",
   "version": "1.5.1",
   "description": "",
   "main": "dist/index.js",
