@@ -15,6 +15,20 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.4.1"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.11.0"
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean --tsconfig tsconfig.build.json",
     "type-check": "tsc --noEmit",
@@ -26,7 +40,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.33.4",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
