@@ -1,16 +1,27 @@
 {
   "name": "@3rd-eye-labs/cardano-offchain-common",
-  "version": "1.4.9",
+  "version": "1.5.0",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean --tsconfig tsconfig.build.json",
     "type-check": "tsc --noEmit",
     "lint": "pnpm eslint .",
     "format:check": "pnpm prettier --check src/ tests/",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +39,7 @@
     "vitest": "^4.0.12"
   },
   "peerDependencies": {
-    "@lucid-evolution/lucid": "0.5.x",
+    "@lucid-evolution/lucid": "0.6.x",
     "@evolution-sdk/evolution": "0.3.x",
     "ts-pattern": "5.9.x"
   }
