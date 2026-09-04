@@ -1,6 +1,6 @@
 {
-  "name": "@3rd-eye-labs/cardano-offchain-common",
-  "version": "1.5.0",
+  "name": "@indigo-labs/cardano-offchain-common",
+  "version": "1.5.2",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -15,23 +15,39 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.4.1"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.11.0"
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean --tsconfig tsconfig.build.json",
     "type-check": "tsc --noEmit",
     "lint": "pnpm eslint .",
     "format:check": "pnpm prettier --check src/ tests/",
+    "format": "pnpm prettier --write src/ tests/",
     "test": "vitest run",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.33.4",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@vitest/eslint-plugin": "^1.5.0",
     "eslint": "^9.39.1",
+    "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
@@ -39,8 +55,8 @@
     "vitest": "^4.0.12"
   },
   "peerDependencies": {
-    "@lucid-evolution/lucid": "0.6.x",
     "@evolution-sdk/evolution": "0.3.x",
+    "@lucid-evolution/lucid": "0.6.x",
     "ts-pattern": "5.9.x"
   }
 }

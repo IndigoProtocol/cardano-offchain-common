@@ -99,3 +99,24 @@ export function unitToAssetClass(
       throw new Error(`Unknown asset format. Asset: ${asset}`);
     });
 }
+
+/**
+ * Partition the assets to positive and negative amounts. Omit zero amounts.
+ */
+export function partitionAssetsBySign(assets: Assets): {
+  positive: Assets;
+  negative: Assets;
+} {
+  const positive: Assets = {};
+  const negative: Assets = {};
+
+  for (const [unit, amt] of Object.entries(assets)) {
+    if (amt > 0n) {
+      positive[unit] = amt;
+    } else if (amt < 0n) {
+      negative[unit] = amt;
+    }
+  }
+
+  return { positive, negative };
+}
