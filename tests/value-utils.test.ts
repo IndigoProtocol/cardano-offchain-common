@@ -79,9 +79,7 @@ describe('Value utils', () => {
     });
 
     test('returns empty objects when all amounts are zero', () => {
-      expect(
-        partitionAssetsBySign({ lovelace: 0n, tokenA: 0n }),
-      ).toEqual({
+      expect(partitionAssetsBySign({ lovelace: 0n, tokenA: 0n })).toEqual({
         positive: {},
         negative: {},
       });
