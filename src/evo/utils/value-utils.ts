@@ -47,6 +47,13 @@ export function isSameAssetClass(ac1: AssetClass, ac2: AssetClass): boolean {
   );
 }
 
+export function hasPolicyId(
+  ac: AssetClass,
+  policyId: Uint8Array<ArrayBufferLike>,
+): boolean {
+  return toHex(ac.currencySymbol) === toHex(policyId);
+}
+
 export function mkAssetsOf(assetClass: AssetClass, amount: bigint): Assets {
   return {
     [assetClassToUnit(assetClass)]: amount,
