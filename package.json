@@ -55,8 +55,8 @@
     "vitest": "^4.0.12"
   },
   "peerDependencies": {
-    "@evolution-sdk/evolution": "0.3.x",
-    "@lucid-evolution/lucid": "0.6.x",
+    "@evolution-sdk/evolution": "0.7.x",
+    "@lucid-evolution/lucid": "0.8.x",
     "ts-pattern": "5.9.x"
   }
 }
